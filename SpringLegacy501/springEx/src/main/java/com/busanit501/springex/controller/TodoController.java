@@ -1,5 +1,6 @@
 package com.busanit501.springex.controller;
 
+import com.busanit501.springex.dto.TodoDTO;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,9 @@ public class TodoController {
     }
 
     @PostMapping("/register")
-    public void registerPostTest() {
+    public void registerPostTest(TodoDTO todoDTO) {
         log.info("todo register 등록 화면 Post 테스트 콘솔");
+        log.info("TodoDTO 타입 0차 테스트 : " + todoDTO);
     }
 
     @GetMapping("/ex1")
@@ -38,5 +40,11 @@ public class TodoController {
     public void ex1Test3(LocalDate dueDate) {
         log.info("ex3 test");
         log.info("LocalDate 타입 1차 테스트 : " + dueDate);
+    }
+
+    @PostMapping("/ex4")
+    public void ex1Test4(TodoDTO todoDTO) {
+        log.info("ex4 test");
+        log.info("TodoDTO 타입 1차 테스트 : " + todoDTO);
     }
 }
