@@ -5,6 +5,9 @@
 </head>
 <body>
 <h1>컨트롤러 : /todo/register의 연결 화면 : list.jsp 임시 화면</h1>
+<form method="post" action="/todo/register">
+    <button type="submit">postTest</button>
+</form>
 </body>
 </html>
 
