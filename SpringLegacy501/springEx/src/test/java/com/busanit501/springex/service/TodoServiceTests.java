@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Log4j2
 @ExtendWith(SpringExtension.class)
@@ -20,7 +21,7 @@ public class TodoServiceTests {
     private TodoService todoService;
 
     @Test
-    public void testInsert() {
+    public void testInsert2() {
         TodoDTO todoDTO = TodoDTO.builder()
                 .title("돈까스333")
                 .dueDate(LocalDate.now())
@@ -28,5 +29,11 @@ public class TodoServiceTests {
                 .writer("홍진태333")
                 .build();
         todoService.insert(todoDTO);
+    }
+
+    @Test
+    public void testListAll() {
+        List<TodoDTO> todoList = todoService.listAll();
+        todoList.forEach(dto -> log.info("dto : " + dto));
     }
 }

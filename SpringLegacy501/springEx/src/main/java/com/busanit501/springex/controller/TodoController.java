@@ -1,21 +1,32 @@
 package com.busanit501.springex.controller;
 
 import com.busanit501.springex.dto.TodoDTO;
+import com.busanit501.springex.service.TodoService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/todo")
 @Log4j2
+@RequiredArgsConstructor
 public class TodoController {
-    @RequestMapping("/list")
-    public void listTest() {
+
+    final TodoService todoService;
+
+    @GetMapping("/list")
+    public void listTest(Model model) {
         log.info("todo list 조회 화면 테스트 콘솔");
+        List<TodoDTO> dtoList = todoService.listAll();
+        model.addAttribute("dtoList", dtoList);
     }
 
     @GetMapping("/register")
@@ -24,9 +35,15 @@ public class TodoController {
     }
 
     @PostMapping("/register")
-    public void registerPostTest(TodoDTO todoDTO) {
-        log.info("todo register 등록 화면 Post 테스트 콘솔");
-        log.info("TodoDTO 타입 0차 테스트 : " + todoDTO);
+    public String registerPostTest(@Valid TodoDTO todoDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        log.info("post 작업중");
+        if (bindingResult.hasErrors()) {
+            log.info("bindingResult.hasErrors() 실행됨");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/todo/register";
+        }
+        todoService.insert(todoDTO);
+        return "redirect:/todo/list";
     }
 
     @GetMapping("/ex1")
