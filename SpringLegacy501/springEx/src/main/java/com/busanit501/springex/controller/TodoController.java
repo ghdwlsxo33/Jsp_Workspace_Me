@@ -61,6 +61,7 @@ public class TodoController {
                 .dueDate(LocalDate.now())
                 .finished(true)
                 .build();
+        // 서버에서 화면으로 데이터 전달 코드
         model.addAttribute("menu", "컵라면");
         model.addAttribute("todoDTO", todoDTO);
     }
