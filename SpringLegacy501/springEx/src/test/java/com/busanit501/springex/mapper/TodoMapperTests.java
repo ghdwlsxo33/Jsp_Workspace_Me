@@ -45,6 +45,4 @@ public class TodoMapperTests {
         TodoVO todoVO = todoMapper.getOne(33L);
         log.info("todoVO : " + todoVO);
     }
-
-
 }

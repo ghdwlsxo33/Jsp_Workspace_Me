@@ -29,6 +29,17 @@ public class TodoController {
         model.addAttribute("dtoList", dtoList);
     }
 
+    @GetMapping("/read")
+    public  void listTest(Long tno, Model model) {
+        log.info("todo list 조회 화면 테스트 콘솔");
+        // C -> S -> Mapper -> DB
+        // C <- S <- Mapper <- DB
+        TodoDTO todoDTO = todoService.getOne(tno);
+        // 서버 -> 화면, 모델
+        model.addAttribute("todoDTO", todoDTO);
+
+    }
+
     @GetMapping("/register")
     public void registerGetTest() {
         log.info("todo register 등록 화면 Get  테스트 콘솔");
